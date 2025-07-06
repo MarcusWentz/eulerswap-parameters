@@ -8,11 +8,10 @@ We provide a method for selecting parameters by studying the oldest AMM stableco
 
 Method of for optimizing liquidity parameters for Eulerswap with primary focus on stablecoins to get the best capital efficiency.
 - Eulerswap AMM and its liquidity distribution.
-- Statistical tool for optimizing Eulerswap liquidity parameters based on one's forecast or historical data.
 - Example with USDT/USDC.
   - Stablecoin Pool Tail Analysis 
   - Stablecoin Pool Tail Fit
-  - Eulerswap Parameter Fit
+  - Eulerswap Parameter Fit Tool
 - Further Optimization Directions
   - Uniswap Liquidity Distribution
   - Phase Space Neural Network
