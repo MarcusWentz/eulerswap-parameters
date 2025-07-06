@@ -75,15 +75,8 @@ We have used this method to optimize liquidity for three stablecoin pairs (USDT/
 Additionally, we ran out of time, but our method can be further improved for these parameters given the following discoveries during our work:
 
 ### Phase Space Neural Network Case
-very basic strat buy above 1 wait for 10 min, if not 1 sell - potential future direction - take the heatmap, express it as a matrix, use neural network to train it on the value of c!
-
-<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/phases_example.jpg?raw=true" alt="Stats" width="1000"/>
-
-t+5 (5 blocks equivalent to 1 minute)
-<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/data_viz/USDC_USDT_phase_space_block1.jpg?raw=true" alt="Stats" width="1000"/>
-t+300 (300 blocks equivalent to 1 hour)
-<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/data_viz/USDC_USDT_phase_space_block300.jpg?raw=true" alt="Stats" width="1000"/>
-[Watch the demo video](img/data_viz/USD_DAI_cex_1_minute.mp4)
+While we were looking at the phase space behavoir across time, we notice asymmetric like prices between $[1...1.05] do not stay there for long so concentration parameters can be adjusted for the right tail after 100 blocks. The potential future direction here is to actually express the phase space heatmap for each lag and train it to a corresponding c value and then feed it new price data for a dynamic adjustment of concentration parameters.
+<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/phases_example.jpeg?raw=true" alt="Stats" width="1000"/>
 
 
 ### Uniswap Liquidity Distribution Case
