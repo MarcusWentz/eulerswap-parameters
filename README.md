@@ -10,8 +10,9 @@ Method of for optimizing liquidity parameters for Eulerswap with primary focus o
 - Eulerswap AMM and its liquidity distribution.
 - Statistical tool for optimizing Eulerswap liquidity parameters based on one's forecast or historical data.
 - Example with USDT/USDC.
-  - Subitem 1.1
-  - Subitem 1.2
+  - Stablecoin Pool Tail Analysis 
+  - Stablecoin Pool Tail Fit
+  - Eulerswap Parameter Fit
 - Further Optimization Directions
   - Uniswap Liquidity Distribution
   - Phase Space Neural Network
@@ -34,34 +35,15 @@ We are mainly focused on the liquidity fingerprint in Figure 1C since we can use
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_AMM.png" alt="Sample Image 1" width="1000"/>
 
 The liquidity fingerprint can be derived with a little bit of calculus and can be confirmed with [desmos](https://www.desmos.com/calculator/8f6bcdcb41) to be the following equation.
+
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_liquidity_distributions.jpg" alt="Sample Image 1" width="1000"/>
 
-We can fit previous historic AMMs with the most frequently traded stablecoin pairs to maximize capital efficiency.
+We can fit the Eulerswap liquidity fingerprint to previous historic AMMs with the most frequently traded stablecoin pairs to maximize capital efficiency.
 
-*image of gamma* One can specify one's own risk profile - manage "c" based on one's preference.
-How can we fit the distribution of 
-
-- how to spot a depeg - sources: general market liquidity (point gordon liao study) and its flow to stables, point out liquidity changes in past AMM uni v3 heatmap.
--does depeg continue? What is the Hurst exponent? What is the autocorrelation?
--what to do when depeg - set lower c to univ2
--point out tails of depeg
-
-
-very basic strat buy above 1 wait for 10 min, if not 1 sell - potential future direction - take the heatmap, express it as a matrix, use neural network to train it on the value of c!
-
-Alternative method: fit the value c to the tick data from uniswap v3 pool as well
-
+### Overview
 Why USDT/DAI may be best pool, the constant mint and burn of the stablecoin will cause changes in DAI price (*thereby generating  more in fees!!), which would counter the stale price of USDT or USDC which may deviate and generate fees more in times of unforeseen crises rather than simply due to mint/burn mechanisms of DAI-like stablecoins.
 
-Method for having a hard cutoff for Eulerswap with univ3 https://www.desmos.com/calculator/02c7569f86
-
 An important thing to note is anti-correlation, a rapid up move in a block can expect the next block to be a rapid down move.
-
------
-
-side not on tails - alpha 3-4 for erc-20 CEX non stables 2-4 for stables CEX, and apparently <2 for stables on DEX!
-
-
 
 ## Installation
 To set up the project, follow these steps:
@@ -115,20 +97,38 @@ curl -H "X-Dune-API-Key:_____________________" "https://api.dune.com/api/v1/quer
 ## Tail analysis
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/USDC_USDT_Histogram.png?raw=true" alt="Stats" width="1000"/>
 ## Tail fit
+
+
+side not on tails - alpha 3-4 for erc-20 CEX non stables 2-4 for stables CEX, and apparently <2 for stables on DEX!
+
+CEX data vs DEX data over same time interval
+point out stablecoin arbitrage and strategies possible because alphas don't match
+
+
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/img_USDC_USDT_TAIL.png?raw=true" alt="Sample Image 1" width="1000"/>
 ## Conclusion optimization
+
 https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/eulerswap_pool_parameters.png?raw=true
+
+
+
 
 
 
 ## Further Optimization
 
+
+
+- how to spot a depeg - sources: general market liquidity (point gordon liao study) and its flow to stables, point out liquidity changes in past AMM uni v3 heatmap.
+-does depeg continue? What is the Hurst exponent? What is the autocorrelation?
+-what to do when depeg - set lower c to univ2
+-point out tails of depeg
+
+
 ### Phase Space Neural Network
+very basic strat buy above 1 wait for 10 min, if not 1 sell - potential future direction - take the heatmap, express it as a matrix, use neural network to train it on the value of c!
 
-optimize c_1 and c_2 parameters for eulerswap pool
-dl full eth node
 extract usdc/usdt block sqrtpricex96 from univ3
-
 
 t+5 (5 blocks equivalent to 1 minute)
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/data_viz/USDC_USDT_phase_space_block1.jpg?raw=true" alt="Stats" width="1000"/>
@@ -138,6 +138,8 @@ t+300 (300 blocks equivalent to 1 hour)
 
 
 ### Uniswap Liquidity Distribution Chase
+
+Alternative method: fit the value c to the tick data from uniswap v3 pool as well
 
 Alternative optimization - histogram from liquidity of univ3 - wisdom of the crowd with cryo:
 Instructions for retrieving data using Cryo:
@@ -150,12 +152,6 @@ For example, just as the procedure we used above by extracting the empirical pri
 we can extract the overall historic liquidity distribution, and simply mimic the behavior - such an approach would mean though that we would be at least two blocks behind (one for reading the data of current liquidity block and one for adjusting eulerswap parameters to fit the liquidity distribution on the next block) 
 
 
-CEX data vs DEX data over same time interval
-point out stablecoin arbitrage and strategies possible 
-
-
-
-
 ```bash
 cryo logs \
 --rpc API_KEY \
@@ -166,19 +162,8 @@ cryo logs \
 --output-dir ./Python/data_cryo
 ```
 
-
+If truly random, then the spectrogram would give us random noise with no patterns, yet we see vertical columns, mention red sinusoidal pattern
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Stablecoin_Frequencies.png?raw=true" alt="Sample Image 1" width="1000"/>
 
 From our previous work on Uniswap pools we also observe patterns linked to NYSE liquidity and bot activity at UTC-00:00, so one could optimize eulerswap parameters not just across the price space, but also time spectrum.
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/uniswap_trade_activity.jpeg?raw=true" alt="Sample Image 1" width="1000"/>
-
-
-
-## License
-
-
-
-MIT
-
-
-
