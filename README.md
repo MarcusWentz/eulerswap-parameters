@@ -6,7 +6,7 @@ We study the oldest AMM stablecoin pools on Uniswap to answer this question and 
 
 ## Description 
 
-Method for optimizing liquidity parameters for Eulerswap with primary focus on stablecoins.
+Method of for optimizing liquidity parameters for Eulerswap with primary focus on stablecoins to get the best capital efficiency.
 - Eulerswap invariant analysis of LP Payoff, price impact, liquidity allocation across price space ([interactive visualization](https://www.desmos.com/calculator/8f6bcdcb41))
   - Subitem 1.1
   - Subitem 1.2
@@ -22,20 +22,20 @@ Method for optimizing liquidity parameters for Eulerswap with primary focus on s
 # Eulerswap AMM
 ### Overview
 
-Any AMM can be dissected into four frameworks:
-  - Reserve space to see invariant / trading function best viewed in log-log.
-  - Liquidity provider's payoff / value function to see divergence loss.
-  - Liquidity fingerprint to see where liquidity is provided to capture trades.
-  - Price impact function to see how concentration affects pool price change.
+Eulerswap is a piece-wise AMM and can be dissected into two functions (red and blue) along four frameworks:
+  1A. Reserve space to see invariant / trading function (best viewed in log-log).
+  1B. Liquidity provider's payoff / value function to see divergence loss.
+  1C. Liquidity fingerprint to see where liquidity is provided to capture trades.
+  1D. Price impact function to see how concentration affects pool price change.
 
-We are mainly focused on the Liquidity fingerprint in Figure 1C since we can use it to optimize our fit for our empirical observations of stablecoin price behavoir. An interactive version of Eulerswap is available in [interactive desmos url](https://www.desmos.com/calculator/8f6bcdcb41).
+We are mainly focused on the liquidity fingerprint in Figure 1C since we can use it to optimize the fit for our empirical observations of stablecoin price behavoir. An interactive version of Eulerswap is available in [interactive desmos url](https://www.desmos.com/calculator/8f6bcdcb41).
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_AMM.png" alt="Sample Image 1" width="1000"/>
 
-Liquidity fingerprint is and can be confirmed with desmos
+The liquidity fingerprint can be derived with a little bit of calculus and can be confirmed with desmos to be the following equation.
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_liquidity_distributions.jpg" alt="Sample Image 1" width="1000"/>
 
 We can fit 
-fit previous historic AMMs with the most frequently traded stablecoin pairs.
+fit previous historic AMMs with the most frequently traded stablecoin pairs to maximize capital efficiency.
 
 *image of gamma* One can specify one's own risk profile - manage "c" based on one's preference.
 How can we fit the distribution of 
