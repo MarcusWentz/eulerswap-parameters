@@ -1,21 +1,26 @@
 # Method for Eulerswap Liquidity Optimization
+![Project Banner](https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/data_viz/USDC_USDT_PARAMETERS.png?raw=true)
 
-![Project Banner](https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_AMM.png)
 ## What should we set Eulerswap liquidity parameters to?
 We study the oldest AMM stablecoin pools on Uniswap to answer this question and focus on the biggest stablecoins: USDC, USDT, DAI.
+
 ## Description 
+
 Method for optimizing liquidity parameters for Eulerswap with primary focus on stablecoins.
 - Eulerswap invariant analysis of LP Payoff, price impact, liquidity allocation across price space.
--   -  
-- 
-   -
-
+  - Subitem 1.1
+  - Subitem 1.2
 - Statistical tools for analyzing stablecoin pool behavior
   - Subitem 1.1
   - Subitem 1.2
 - Tool for optimizing Eulerswap liquidity parameters based on one's forecast or historical data.
 - Approximation of Eulerswap with discrete LP positions to exit 100% out of a token.
 
+
+# Eulerswap AMM
+<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_AMM.png" alt="Sample Image 1" width="1000"/>
+
+Liquidity fingerprint is and can be confirmed with desmos
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_liquidity_distributions.jpg" alt="Sample Image 1" width="1000"/>
 
 
