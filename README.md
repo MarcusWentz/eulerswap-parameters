@@ -1,6 +1,6 @@
 # Eulerswap Liquidity Optimization
 
-![Project Banner](https://via.placeholder.com/800x200.png?text=Eulerswap+Liquidity+Optimization)
+![Project Banner]([https://via.placeholder.com/800x200.png?text=Eulerswap+Liquidity+Optimization](https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_AMM.png))
 
 ## Description
 Method for optimizing liquidity parameters for Eulerswap with primary focus on stablecoins.
@@ -51,7 +51,7 @@ WHERE protocol = 'Eulerswap';
 
 ## Images
 
-<img src="https://drive.google.com/file/d/12XLJTd1sHs-V-iH-gDEvMW6Ok5a0hMe-/view?usp=drive_link" alt="Sample Image 1" width="400"/>
+<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_AMM.png" alt="Sample Image 1" width="400"/>
 ## License
 
 MIT
