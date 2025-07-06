@@ -127,7 +127,8 @@ curl -H "X-Dune-API-Key:_____________________" "https://api.dune.com/api/v1/quer
 
 
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Stablecoin_Frequencies.png?raw=true" alt="Sample Image 1" width="1000"/>
-From our previous work on Uniswap pools we also observe patterns linked to NYSE liquidity and bot activity at UTC-00:00
+
+From our previous work on Uniswap pools we also observe patterns linked to NYSE liquidity and bot activity at UTC-00:00, so one could optimize eulerswap parameters not just across the price space, but also time spectrum.
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/uniswap_trade_activity.jpeg?raw=true" alt="Sample Image 1" width="1000"/>
 
 
