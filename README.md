@@ -48,9 +48,18 @@ We can fit the Eulerswap liquidity fingerprint to previous historic data of stab
 We focus in this section just on the USDC/USDT pair below, but the other pool data output are also available in the img folder, including its behavior in [phasespace](https://drive.google.com/drive/folders/1AzrlKZApBz60PD6itQ5ry6MnSiqOLOAe).
 
 ## Stablecoin Pool Tail Analysis
+
+Explain chart, mention [power law](https://pypi.org/project/powerlaw/) library 
+
+```python
+  pip install powerlaw
+```
+
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/USDC_USDT_Histogram.png?raw=true" alt="Stats" width="1000"/>
 
 ## Tail fit
+
+Explain chart 
 
 side not on tails - alpha 3-4 for erc-20 CEX non stables 2-4 for stables CEX, and apparently <2 for stables on DEX!
 
@@ -68,18 +77,13 @@ https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/eulerswap_pool
 
 
 
-## Further Optimization
-
-Why USDT/DAI may be best pool, the constant mint and burn of the stablecoin will cause changes in DAI price (*thereby generating  more in fees!!), which would counter the stale price of USDT or USDC which may deviate and generate fees more in times of unforeseen crises rather than simply due to mint/burn mechanisms of DAI-like stablecoins.
-
+## Further Optimization Cases
 
 - how to spot a depeg - sources: general market liquidity (point gordon liao study) and its flow to stables, point out liquidity changes in past AMM uni v3 heatmap.
 -does depeg continue? What is the Hurst exponent? What is the autocorrelation?
 -what to do when depeg - set lower c to univ2
--point out tails of depeg
 
-
-### Phase Space Neural Network
+### Phase Space Neural Network Case
 very basic strat buy above 1 wait for 10 min, if not 1 sell - potential future direction - take the heatmap, express it as a matrix, use neural network to train it on the value of c!
 
 extract usdc/usdt block sqrtpricex96 from univ3
@@ -91,7 +95,7 @@ t+300 (300 blocks equivalent to 1 hour)
 [Watch the demo video](img/data_viz/USD_DAI_cex_1_minute.mp4)
 
 
-### Uniswap Liquidity Distribution Chase
+### Uniswap Liquidity Distribution Case
 
 Alternative optimization - histogram from liquidity of univ3 - wisdom of the crowd with cryo:
 Instructions for retrieving data using Cryo:
@@ -107,8 +111,7 @@ cryo logs \
 ```
 
 
-
-### Time optimization
+### Time Optimization Case
 
 Cases of volatility lasting: windowed fourier transform, autocorrelation negative, hurst exponent below 0.5
 
@@ -119,9 +122,6 @@ For example, just as the procedure we used above by extracting the empirical pri
 we can extract the overall historic liquidity distribution, and simply mimic the behavior - such an approach would mean though that we would be at least two blocks behind (one for reading the data of current liquidity block and one for adjusting eulerswap parameters to fit the liquidity distribution on the next block) 
 
 
-
-
-
 If truly random, then the spectrogram would give us random noise with no patterns, yet we see vertical columns, mention red sinusoidal pattern
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Stablecoin_Frequencies.png?raw=true" alt="Sample Image 1" width="1000"/>
 
@@ -130,9 +130,14 @@ From our previous work on Uniswap pools we also observe patterns linked to NYSE 
 
 
 
+
+
+
+
+
 ## Data Retrieval
 
-In our case we fit the Eulerswap parameters based on empirical observation of the following stablecoin pool addresses using as much data as possible:
+Data gathered for the following stablecoin pool addresses:
 
 ```
     USDC_DAI_0x5777d92f208679DB4b9778590Fa3CAB3aC9e2168
