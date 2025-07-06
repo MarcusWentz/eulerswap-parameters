@@ -37,22 +37,20 @@ The liquidity fingerprint can be derived with a little bit of calculus and can b
 
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_liquidity_distributions.jpg" alt="Sample Image 1" width="1000"/>
 
-We can fit the Eulerswap liquidity fingerprint to previous historic AMMs with the most frequently traded stablecoin pairs to maximize capital efficiency.
+We can fit the Eulerswap liquidity fingerprint to previous historic data of stablecoin price movement. In our case we fit the Eulerswap parameters based on empirical observation of the following stablecoin pool addresses using as much onchain data as possible for the past five years:
 
-### Overview
+```
+    USDC_DAI_0x5777d92f208679DB4b9778590Fa3CAB3aC9e2168
+    USDT_DAI_0x48da0965ab2d2cbf1c17c09cfb5cbe67ad5b1406
+    USDC_USDT_0x3416cF6C708Da44DB2624D63ea0AAef7113527C6 
+```
+
+We focus in this section just on the USDC/USDT pair below, but the other pool data output are also available in the img folder.
+
+### Stablecoin Pool Tail Analysis
 Why USDT/DAI may be best pool, the constant mint and burn of the stablecoin will cause changes in DAI price (*thereby generating  more in fees!!), which would counter the stale price of USDT or USDC which may deviate and generate fees more in times of unforeseen crises rather than simply due to mint/burn mechanisms of DAI-like stablecoins.
 
 An important thing to note is anti-correlation, a rapid up move in a block can expect the next block to be a rapid down move.
-
-## Installation
-To set up the project, follow these steps:
-
-```bash
-# Clone the repository
-git clone https://github.com/your-username/eulerswap-liquidity-optimization.git
-cd eulerswap-liquidity-optimization
-```
-
 
 
 
@@ -65,7 +63,6 @@ In our case we fit the Eulerswap parameters based on empirical observation of th
     USDT_DAI_0x48da0965ab2d2cbf1c17c09cfb5cbe67ad5b1406
     USDC_USDT_0x3416cF6C708Da44DB2624D63ea0AAef7113527C6  
 ```
-
 
 ### Cryo
 Instructions for retrieving data using Cryo:
@@ -91,7 +88,6 @@ curl -H "X-Dune-API-Key:_____________________" "https://api.dune.com/api/v1/quer
 
 
 ## Images
-
 
 ## Tail analysis
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/USDC_USDT_Histogram.png?raw=true" alt="Stats" width="1000"/>
