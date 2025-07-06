@@ -54,38 +54,6 @@ An important thing to note is anti-correlation, a rapid up move in a block can e
 
 
 
-## Data Retrieval
-
-In our case we fit the Eulerswap parameters based on empirical observation of the following stablecoin pool addresses using as much data as possible:
-
-```
-    USDC_DAI_0x5777d92f208679DB4b9778590Fa3CAB3aC9e2168
-    USDT_DAI_0x48da0965ab2d2cbf1c17c09cfb5cbe67ad5b1406
-    USDC_USDT_0x3416cF6C708Da44DB2624D63ea0AAef7113527C6  
-```
-
-### Cryo
-Instructions for retrieving data using Cryo:
-
-```bash
-cryo logs --rpc https://eth.drpc.org --contract 0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640 --event-signature "Swap(address indexed sender, address indexed recipient, int256 amount0, int256 amount1, uint160 sqrtPriceX96, uint128 liquidity, int24 tick)" --topic0 0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67 --blocks 18050000:18060000 --requests-per-second 10 --max-concurrent-requests 5 --output-dir ./Python/data_cryo
-```
-
-### SQL
-
-Instructions for retrieving data using SQL:
-
-```sql
-SELECT *
-FROM uniswap_v3_ethereum.Pair_evt_Swap
-WHERE contract_address = 0x48DA0965ab2d2cbf1C17C09cFB5Cbe67Ad5B1406
-  AND evt_block_time >= DATE '2022-01-01'
-  AND evt_block_time <= DATE '2023-01-01'
-
-curl -H "X-Dune-API-Key:_____________________" "https://api.dune.com/api/v1/query/5365625/results/csv?limit=15000" > dune_output2023_2022_dai_usdt.csv
-```
-
-
 
 ## Images
 
@@ -162,3 +130,41 @@ If truly random, then the spectrogram would give us random noise with no pattern
 
 From our previous work on Uniswap pools we also observe patterns linked to NYSE liquidity and bot activity at UTC-00:00, so one could optimize eulerswap parameters not just across the price space, but also time spectrum.
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/uniswap_trade_activity.jpeg?raw=true" alt="Sample Image 1" width="1000"/>
+
+
+
+## Data Retrieval
+
+In our case we fit the Eulerswap parameters based on empirical observation of the following stablecoin pool addresses using as much data as possible:
+
+```
+    USDC_DAI_0x5777d92f208679DB4b9778590Fa3CAB3aC9e2168
+    USDT_DAI_0x48da0965ab2d2cbf1c17c09cfb5cbe67ad5b1406
+    USDC_USDT_0x3416cF6C708Da44DB2624D63ea0AAef7113527C6  
+```
+
+There are two approaches to data retrieval: Cryo with RPC, Cryo with home node, Dune SQL query.
+
+### Cryo
+Instructions for retrieving data using Cryo with RPC and home node:
+
+```bash
+cryo logs --rpc https://eth.drpc.org --contract 0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640 --event-signature "Swap(address indexed sender, address indexed recipient, int256 amount0, int256 amount1, uint160 sqrtPriceX96, uint128 liquidity, int24 tick)" --topic0 0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67 --blocks 18050000:18060000 --requests-per-second 10 --max-concurrent-requests 5 --output-dir ./Python/data_cryo
+```
+
+### SQL
+
+Instructions for retrieving data using SQL Dune query (create a free account, insert API KEY and copy API dune query url):
+
+```sql
+SELECT *
+FROM uniswap_v3_ethereum.Pair_evt_Swap
+WHERE contract_address = 0x3416cF6C708Da44DB2624D63ea0AAef7113527C6  
+  AND evt_block_time >= DATE '2022-01-01' 
+  AND evt_block_time <= DATE '2023-01-01'
+
+curl -H "X-Dune-API-Key:_____________________" "https://api.dune.com/api/v1/query/xxxxxx/results/csv?limit=15000" > dune_output2023_2022_dai_usdt.csv
+```
+
+
+
