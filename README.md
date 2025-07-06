@@ -7,7 +7,7 @@ We study the oldest AMM stablecoin pools on Uniswap to answer this question and 
 ## Description 
 
 Method for optimizing liquidity parameters for Eulerswap with primary focus on stablecoins.
-- Eulerswap invariant analysis of LP Payoff, price impact, liquidity allocation across price space.
+- Eulerswap invariant analysis of LP Payoff, price impact, liquidity allocation across price space (![interactive visualization](https://www.desmos.com/calculator/8f6bcdcb41))
   - Subitem 1.1
   - Subitem 1.2
 - Statistical tools for analyzing stablecoin pool behavior
@@ -15,6 +15,8 @@ Method for optimizing liquidity parameters for Eulerswap with primary focus on s
   - Subitem 1.2
 - Tool for optimizing Eulerswap liquidity parameters based on one's forecast or historical data.
 - Approximation of Eulerswap with discrete LP positions to exit 100% out of a token.
+  - If one is interested in LPing in non-stablecoin pools there is also a delta-neutral optimization available in the file.
+  - Method for having a hard cutoff for Eulerswap with univ3 ![test](https://www.desmos.com/calculator/02c7569f86)
 
 
 # Eulerswap AMM
