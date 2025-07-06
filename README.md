@@ -1,4 +1,4 @@
-# Eulerswap Liquidity Optimization
+# Method for Eulerswap Liquidity Optimization
 
 ![Project Banner](https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_AMM.png)
 
