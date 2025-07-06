@@ -60,21 +60,6 @@ An important thing to note is anti-correlation, a rapid up move in a block can e
 
 side not on tails - alpha 3-4 for erc-20 CEX non stables 2-4 for stables CEX, and apparently <2 for stables on DEX!
 
-examine stablecoins as it is a growing segment of defi - focus on largest three stablecoins USDC, USDC, DAI
-
-FURTHER RESEARCH:
-
-In our case we fit the Eulerswap parameters based on empirical observation using as much data as possible.
-
-Cases of volatility lasting: windowed fourier transform, autocorrelation negative, hurst exponent below 0.5
-
-For example, just as the procedure we used above by extracting the empirical price movement of the pool, 
-we can extract the overall historic liquidity distribution, and simply mimic the behavior - such an approach would mean though that we would be at least two blocks behind (one for reading the data of current liquidity block and one for adjusting eulerswap parameters to fit the liquidity distribution on the next block) 
-
-
-CEX data vs DEX data over same time interval
-point out stablecoin arbitrage and strategies possible 
-
 
 
 ## Installation
@@ -90,6 +75,15 @@ cd eulerswap-liquidity-optimization
 
 
 ## Data Retrieval
+
+In our case we fit the Eulerswap parameters based on empirical observation of the following stablecoin pool addresses using as much data as possible:
+
+```
+    USDC_DAI_0x5777d92f208679DB4b9778590Fa3CAB3aC9e2168
+    USDT_DAI_0x48da0965ab2d2cbf1c17c09cfb5cbe67ad5b1406
+    USDC_USDT_0x3416cF6C708Da44DB2624D63ea0AAef7113527C6  
+```
+
 
 ### Cryo
 Instructions for retrieving data using Cryo:
@@ -111,6 +105,8 @@ WHERE contract_address = 0x48DA0965ab2d2cbf1C17C09cFB5Cbe67Ad5B1406
 
 curl -H "X-Dune-API-Key:_____________________" "https://api.dune.com/api/v1/query/5365625/results/csv?limit=15000" > dune_output2023_2022_dai_usdt.csv
 ```
+
+
 
 ## Images
 
@@ -137,6 +133,20 @@ extract usdc/usdt block sqrtpricex96 from univ3
 
 Alternative optimization - histogram from liquidity of univ3 - wisdom of the crowd with cryo:
 Instructions for retrieving data using Cryo:
+
+
+
+Cases of volatility lasting: windowed fourier transform, autocorrelation negative, hurst exponent below 0.5
+
+For example, just as the procedure we used above by extracting the empirical price movement of the pool, 
+we can extract the overall historic liquidity distribution, and simply mimic the behavior - such an approach would mean though that we would be at least two blocks behind (one for reading the data of current liquidity block and one for adjusting eulerswap parameters to fit the liquidity distribution on the next block) 
+
+
+CEX data vs DEX data over same time interval
+point out stablecoin arbitrage and strategies possible 
+
+
+
 
 ```bash
 cryo logs \
