@@ -6,7 +6,7 @@ We provide a method for selecting parameters by studying the oldest AMM stableco
 
 ## Description 
 
-Method of for optimizing liquidity parameters for Eulerswap with primary focus on stablecoins to get the best capital efficiency.
+Method for optimizing liquidity parameters for Eulerswap with primary focus on stablecoins to get the best capital efficiency.
 - Eulerswap AMM and its liquidity distribution.
 - Example with USDT/USDC.
   - Stablecoin Pool Tail Analysis 
@@ -45,7 +45,7 @@ We can fit the Eulerswap liquidity fingerprint to previous historic data of stab
     USDC_USDT_0x3416cF6C708Da44DB2624D63ea0AAef7113527C6 
 ```
 
-We focus in this section just on the USDC/USDT pair below, but the other pool data output are also available in the img folder, including its behavior in [phasespace](https://drive.google.com/drive/folders/1AzrlKZApBz60PD6itQ5ry6MnSiqOLOAe).
+We focus in this section just on the USDC/USDT pair below, but the other pool data output are also available in the img folder.
 
 ## Stablecoin Pool Tail Analysis
 
@@ -80,8 +80,9 @@ our findings are parameter this, etc, mention similar to other pools.
 
 
 
-## Further Optimization Cases
+## Future Potential and Further Optimization
 
+We have used this method to optimize liquidity for three stablecoin pairs (USDT/USDC, USDC/DAI, USDT/DAI) on Eulerswap, but this method can extend to all pairs, doing so would require 
 - how to spot a depeg - sources: general market liquidity (point gordon liao study) and its flow to stables, point out liquidity changes in past AMM uni v3 heatmap.
 -does depeg continue? What is the Hurst exponent? What is the autocorrelation?
 -what to do when depeg - set lower c to univ2
@@ -128,7 +129,7 @@ we can extract the overall historic liquidity distribution, and simply mimic the
 If truly random, then the spectrogram would give us random noise with no patterns, yet we see vertical columns, mention red sinusoidal pattern
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Stablecoin_Frequencies.png?raw=true" alt="Sample Image 1" width="1000"/>
 
-From our previous work on Uniswap pools we also observe patterns linked to NYSE liquidity and bot activity at UTC-00:00, so one could optimize eulerswap parameters not just across the price space, but also time spectrum.
+From our previous work on Uniswap v3 pools we also observe patterns linked to NYSE liquidity and bot activity at UTC-00:00, so one could optimize eulerswap parameters not just across the price space, but also time spectrum. For example, the data can be further refined by looking at the blocks prior to NYSE open and UTC 0:00 open to adjust the c_1 and c_2 parameters.
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/uniswap_trade_activity.jpeg?raw=true" alt="Sample Image 1" width="1000"/>
 
 
