@@ -108,7 +108,7 @@ If stablecoin data were truly random, then the Hurst exponent would be flat, the
 
 Instead we see Hurst exponents for our stablecoin pools below 0.5 indicating anti-correlation, the autocorrelation plot further confirms this (negative correlation on the next block, followed by dampening), the periodogram highlights periodic oscillations in the USDT/DAI pool, indicating low frequency oscillations in price moves also visible with equal spacings in red in the spectrogram. The spectrogram also shows us clear vertical columns instead of randomness which pinpoints to volatility clustering in the stablecoin pools. 
 
-All of this points to the fact that there are still signals just from the price movement that can be extracte to further optimize Eulerswap parameters across time.
+All of this points to the fact that there are still signals just from the price movement that can be extracted to further optimize Eulerswap parameters across time.
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Stablecoin_Frequencies.png?raw=true" alt="Sample Image 1" width="1000"/>
 
 For example, from our previous work on Uniswap v3 pools at ETHNY we also observed patterns linked to NYSE liquidity and bot activity at UTC-00:00, so one could optimize Eulerswap parameters across daily cycles. For example, the data can be further refined by looking at the blocks prior to NYSE open and UTC 0:00 noting that if prices start to move in US markets negatively, they will impact most likely crypto negatively as shown by the work of [Gordon Laio here](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4910537), but stablecoins would then have a positive rise in liquidity, which would lead to an adjustment of the c_1 and c_2 parameters.
