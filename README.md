@@ -68,11 +68,14 @@ point out stablecoin arbitrage and strategies possible because alphas don't matc
 
 
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/img_USDC_USDT_TAIL.png?raw=true" alt="Sample Image 1" width="1000"/>
-## Conclusion optimization
 
-https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/eulerswap_pool_parameters.png?raw=true
+## Eulerswap Parameter optimization
 
+We have determined only median can be used, we now fit the empirical data using scipy, if it fails, defaul to least squared approach:
 
+<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/eulerswap_pool_parameters.png?raw=true"  width="1000"/>
+
+our findings are parameter this, etc, mention similar to other pools.
 
 
 
