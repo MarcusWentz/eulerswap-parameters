@@ -2,21 +2,23 @@
 ![Project Banner](https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/eulerswap_pool_parameters.png?raw=true)
 
 ## What should we set Eulerswap liquidity parameters to?
-We study the oldest AMM stablecoin pools on Uniswap to answer this question and focus on the biggest stablecoins: USDC, USDT, DAI.
+We provide a method for selecting parameters by studying the oldest AMM stablecoin pools on Uniswap to answer this question and focus on the biggest stablecoins: USDC, USDT, DAI.
 
 ## Description 
 
 Method of for optimizing liquidity parameters for Eulerswap with primary focus on stablecoins to get the best capital efficiency.
-- Eulerswap invariant analysis of LP Payoff, price impact, liquidity allocation across price space ([interactive visualization](https://www.desmos.com/calculator/8f6bcdcb41))
+- Eulerswap AMM and its liquidity distribution.
+- Statistical tool for optimizing Eulerswap liquidity parameters based on one's forecast or historical data.
+- Example with USDT/USDC.
   - Subitem 1.1
   - Subitem 1.2
-- Statistical tools for analyzing stablecoin pool behavior
-  - Subitem 1.1
-  - Subitem 1.2
-- Tool for optimizing Eulerswap liquidity parameters based on one's forecast or historical data.
+- Further Optimization Directions
+  - Uniswap Liquidity Distribution
+  - Phase Space Neural Network
+  - Time-based Concentration
 - Approximation of Eulerswap with discrete LP positions to exit 100% out of a token.
-  - If one is interested in LPing in non-stablecoin pools there is also a delta-neutral optimization available in the file.
   - Method for having a hard cutoff for Eulerswap with univ3 [url desmos](https://www.desmos.com/calculator/02c7569f86)
+  - If one is interested in LPing in non-stablecoin pools there is also a delta-neutral optimization available in the file.
 
 
 # Eulerswap AMM
@@ -116,7 +118,18 @@ curl -H "X-Dune-API-Key:_____________________" "https://api.dune.com/api/v1/quer
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/img_USDC_USDT_TAIL.png?raw=true" alt="Sample Image 1" width="1000"/>
 ## Conclusion optimization
 https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/eulerswap_pool_parameters.png?raw=true
-## Phase Space
+
+
+
+## Further Optimization
+
+### Phase Space Neural Network
+
+optimize c_1 and c_2 parameters for eulerswap pool
+dl full eth node
+extract usdc/usdt block sqrtpricex96 from univ3
+
+
 t+5 (5 blocks equivalent to 1 minute)
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/data_viz/USDC_USDT_phase_space_block1.jpg?raw=true" alt="Stats" width="1000"/>
 t+300 (300 blocks equivalent to 1 hour)
@@ -124,16 +137,12 @@ t+300 (300 blocks equivalent to 1 hour)
 [Watch the demo video](img/data_viz/USD_DAI_cex_1_minute.mp4)
 
 
-## Further Optimization
-
-optimize c_1 and c_2 parameters for eulerswap pool
-dl full eth node
-extract usdc/usdt block sqrtpricex96 from univ3
+### Uniswap Liquidity Distribution Chase
 
 Alternative optimization - histogram from liquidity of univ3 - wisdom of the crowd with cryo:
 Instructions for retrieving data using Cryo:
 
-
+### Time optimization
 
 Cases of volatility lasting: windowed fourier transform, autocorrelation negative, hurst exponent below 0.5
 
