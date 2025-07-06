@@ -30,14 +30,14 @@ Eulerswap is a piece-wise AMM and can be dissected into two functions (red and b
   - 1C. Liquidity fingerprint to see where liquidity is provided to capture trades.
   - 1D. Price impact function to see how concentration affects pool price change.
 
-We are mainly focused on the liquidity fingerprint in Figure 1C since we can use it to optimize the fit for our empirical observations of stablecoin price behavoir. An interactive version of Eulerswap is available in [interactive desmos url](https://www.desmos.com/calculator/8f6bcdcb41).
+We are mainly focused on the liquidity fingerprint in Figure 1C since we can use it to optimize the fit for our empirical observations of stablecoin price behavoir. 
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_AMM.png" alt="Sample Image 1" width="1000"/>
 
 The liquidity fingerprint can be derived with a little bit of calculus and can be confirmed with [desmos](https://www.desmos.com/calculator/8f6bcdcb41) to be the following equation.
 
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_liquidity_distributions.jpg" alt="Sample Image 1" width="1000"/>
 
-We can fit the Eulerswap liquidity fingerprint to previous historic data of stablecoin price movement. In our case we fit the Eulerswap parameters based on empirical observation of the following stablecoin pool addresses using as much onchain data as possible for the past five years:
+We can fit the Eulerswap liquidity fingerprint to previous historic data of stablecoin price movement. In our case we fit the Eulerswap parameters based on empirical observation of the following stablecoin pool addresses using as much onchain data as possible for the past five years with data backed on our [Google drive](https://drive.google.com/drive/folders/1AzrlKZApBz60PD6itQ5ry6MnSiqOLOAe?usp=sharing):
 
 ```
     USDC_DAI_0x5777d92f208679DB4b9778590Fa3CAB3aC9e2168
@@ -45,7 +45,7 @@ We can fit the Eulerswap liquidity fingerprint to previous historic data of stab
     USDC_USDT_0x3416cF6C708Da44DB2624D63ea0AAef7113527C6 
 ```
 
-We focus in this section just on the USDC/USDT pair below, but the other pool data output are also available in the img folder.
+We focus in this section just on the USDC/USDT pair below, but the other pool data output are also available in the img folder, including its behavior in [phasespace](https://drive.google.com/drive/folders/1AzrlKZApBz60PD6itQ5ry6MnSiqOLOAe).
 
 ### Stablecoin Pool Tail Analysis
 Why USDT/DAI may be best pool, the constant mint and burn of the stablecoin will cause changes in DAI price (*thereby generating  more in fees!!), which would counter the stale price of USDT or USDC which may deviate and generate fees more in times of unforeseen crises rather than simply due to mint/burn mechanisms of DAI-like stablecoins.
