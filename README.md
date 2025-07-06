@@ -75,13 +75,18 @@ We have used this method to optimize liquidity for three stablecoin pairs (USDT/
 Additionally, we ran out of time, but our method can be further improved for these parameters given the following discoveries during our work:
 
 ### Phase Space Neural Network Case
-While we were looking at the phase space behavoir across time, we notice asymmetric like prices between $[1...1.05] do not stay there for long so concentration parameters can be adjusted for the right tail after 100 blocks. The potential future direction here is to actually express the phase space heatmap for each lag and train it to a corresponding c value and then feed it new price data for a dynamic adjustment of concentration parameters.
+While we were looking at the phase space behavoir across time, we notice asymmetries like prices between $[1...1.05] do not stay there for more than 100 blocks so concentration parameters can be adjusted for the right tail. The potential future direction here is to actually express the phase space heatmap for each lag and train it to a corresponding c value and then feed it new price data for a dynamic adjustment of concentration parameters.
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/phases_example.jpeg?raw=true" alt="Stats" width="1000"/>
-
+t+5 (5 blocks equivalent to 1 minute notice the prices above $1 on the diagonal)
+<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/data_viz/USDC_USDT_phase_space_block1.jpg?raw=true" alt="Stats" width="1000"/>
+t+300 (300 blocks equivalent to 1 hour as time goes on the moves away from $1 converge to a cross)
+<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/data_viz/USDC_USDT_phase_space_block300.jpg?raw=true" alt="Stats" width="1000"/>
+[We have a video in the /img folder and Google Drive that shows this behavior across time](img/data_viz/USDC_USDT_phase_space_video.mp4)
 
 ### Uniswap Liquidity Distribution Case
 
-Alternative optimization - histogram from liquidity of univ3 - wisdom of the crowd with cryo:
+Alternatively, instead of training on past data, one can tap into the wisdom of the crowd on a uniswap pool by extracting the liquidity distribution. Such an approach would mean though that we would be at least two blocks behind (one for reading the data of current liquidity block and one for adjusting Eulerswap parameters to fit the liquidity distribution on the next block). This is a lagging approach.
+
 Instructions for retrieving data using Cryo:
 
 ```bash
@@ -95,31 +100,19 @@ cryo logs \
 ```
 
 
-### Time Optimization Case
+### Time Optimization Refinement
 
+We can further decompose the data across time to see if we can pick any insights for adjusting liquidity.
 
+If stablecoin data were truly random, then the Hurst exponent would be flat, the autocorrelation would be flat, the periodogram (which uses Euler's formula during the Fourier transform decomposition btw!) would also be flat, and the spectrogram across time would resemble white noise across time. 
 
-An important thing to note is anti-correlation, a rapid up move in a block can expect the next block to be a rapid down move.
+Instead we see Hurst exponents for our stablecoin pools below 0.5 indicating anti-correlation, the autocorrelation plot further confirms this (negative correlation on the next block, followed by dampening), the periodogram highlights periodic oscillations in the USDT/DAI pool, indicating low frequency oscillations in price moves also visible with equal spacings in red in the spectrogram. The spectrogram also shows us clear vertical columns instead of randomness which pinpoints to volatility clustering in the stablecoin pools. 
 
-
-- how to spot a depeg - sources: general market liquidity (point gordon liao study) and its flow to stables, point out liquidity changes in past AMM uni v3 heatmap.
--does depeg continue? What is the Hurst exponent? What is the autocorrelation?
--what to do when depeg - set lower c to univ2
-
-For example, just as the procedure we used above by extracting the empirical price movement of the pool, 
-we can extract the overall historic liquidity distribution, and simply mimic the behavior - such an approach would mean though that we would be at least two blocks behind (one for reading the data of current liquidity block and one for adjusting eulerswap parameters to fit the liquidity distribution on the next block) 
-
-
-If truly random, then the spectrogram would give us random noise with no patterns, yet we see vertical columns, mention red sinusoidal pattern
+All of this points to the fact that there are still signals just from the price movement that can be extracte to further optimize Eulerswap parameters across time.
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Stablecoin_Frequencies.png?raw=true" alt="Sample Image 1" width="1000"/>
 
-From our previous work on Uniswap v3 pools at ETHNY we also observed patterns linked to NYSE liquidity and bot activity at UTC-00:00, so one could optimize Eulerswap parameters not just across the price space, but also time spectrum. For example, the data can be further refined by looking at the blocks prior to NYSE open and UTC 0:00 open to adjust the c_1 and c_2 parameters.
+For example, from our previous work on Uniswap v3 pools at ETHNY we also observed patterns linked to NYSE liquidity and bot activity at UTC-00:00, so one could optimize Eulerswap parameters across daily cycles. For example, the data can be further refined by looking at the blocks prior to NYSE open and UTC 0:00 noting that if prices start to move in US markets negatively, they will impact most likely crypto negatively as shown by the work of [Gordon Laio here](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4910537), but stablecoins would then have a positive rise in liquidity, which would lead to an adjustment of the c_1 and c_2 parameters.
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/uniswap_trade_activity.jpeg?raw=true" alt="Sample Image 1" width="1000"/>
-
-
-
-
-
 
 
 
