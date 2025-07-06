@@ -93,10 +93,20 @@ t+300 (300 blocks equivalent to 1 hour)
 
 ### Uniswap Liquidity Distribution Chase
 
-Alternative method: fit the value c to the tick data from uniswap v3 pool as well
-
 Alternative optimization - histogram from liquidity of univ3 - wisdom of the crowd with cryo:
 Instructions for retrieving data using Cryo:
+
+```bash
+cryo logs \
+--rpc API_KEY \
+--contract 0x5777d92f208679DB4b9778590Fa3CAB3aC9e2168 \
+--event-signature "Mint(address sender, address indexed owner, int24 indexed tickLower, int24 indexed tickUpper, uint128 amount, int256 amount0, int256 amount1)" \
+--event-signature "Burn(address indexed owner, int24 indexed tickLower, int24 indexed tickUpper, uint128 amount, int256 amount0, int256 amount1)" \
+--blocks 12376729:12377729 \
+--output-dir ./Python/data_cryo
+```
+
+
 
 ### Time optimization
 
@@ -109,15 +119,7 @@ For example, just as the procedure we used above by extracting the empirical pri
 we can extract the overall historic liquidity distribution, and simply mimic the behavior - such an approach would mean though that we would be at least two blocks behind (one for reading the data of current liquidity block and one for adjusting eulerswap parameters to fit the liquidity distribution on the next block) 
 
 
-```bash
-cryo logs \
---rpc API_KEY \
---contract 0x5777d92f208679DB4b9778590Fa3CAB3aC9e2168 \
---event-signature "Mint(address sender, address indexed owner, int24 indexed tickLower, int24 indexed tickUpper, uint128 amount, int256 amount0, int256 amount1)" \
---event-signature "Burn(address indexed owner, int24 indexed tickLower, int24 indexed tickUpper, uint128 amount, int256 amount0, int256 amount1)" \
---blocks 12376729:12377729 \
---output-dir ./Python/data_cryo
-```
+
 
 
 If truly random, then the spectrogram would give us random noise with no patterns, yet we see vertical columns, mention red sinusoidal pattern
