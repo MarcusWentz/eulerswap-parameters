@@ -1,5 +1,5 @@
 # Method for Eulerswap Liquidity Optimization
-![Project Banner](https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/data_viz/USDC_USDT_PARAMETERS.png?raw=true)
+![Project Banner](https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/eulerswap_pool_parameters.png?raw=true)
 
 ## What should we set Eulerswap liquidity parameters to?
 We study the oldest AMM stablecoin pools on Uniswap to answer this question and focus on the biggest stablecoins: USDC, USDT, DAI.
