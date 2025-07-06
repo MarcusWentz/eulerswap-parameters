@@ -49,36 +49,30 @@ We focus in this section just on the USDC/USDT pair below, but the other pool da
 
 ## Stablecoin Pool Tail Analysis
 
-We look at the sqrtpricex96 of USDC/USDT and adjust the decimals in plot A to normalize it at $1. The histogram in B confirms asymmetry in our pool with symmetric fat tailed distributions not being a good fit meaning we have to have separate parametrs for c_1 and c_2. Plots C and D confirm asymmetry in the tails. Plots E and F examine the slope of each percentage change as one descends along the histogram and require the [power law](https://pypi.org/project/powerlaw/) library.
+We look at the sqrtpricex96 of USDC/USDT and adjust the decimals in plot A to normalize it at $1. The histogram in B confirms asymmetry in our pool with symmetric fat tailed distributions not being a good fit meaning we have to have separate parametrs for c_1 and c_2. Plots C and D confirm asymmetry in the tails. Plots E and F examine the slope of the returns as one descends away from the peak and require the [power law](https://pypi.org/project/powerlaw/) library. Plot F also tells us which expected moments have any significance or not. In our case we get some startling fat tailed results.
 ```python
   pip install powerlaw
 ```
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/USDC_USDT_Histogram.png?raw=true" alt="Stats" width="1000"/>
 
 ## Tail fit
-We fit two different distributions (Pareto and stretched exponential) and find that the power law is statistically significant both in its tail of alpha=1.6 for both tails (indicating a distribution so fat that the mean is undefined, but the median is) and also find that the Pareto distribution is the better fit over the stretched exponential. This result is surprising, considering how stablecoins on CEX have alpha ranging between 2 and 4 from our previous research.
+We fit two different distributions (power law (Pareto) and stretched exponential) and find that the power law is statistically significant both in its tail of alpha=1.62 for both tails (indicating a distribution so fat that the mean is undefined, but the median is) and also find that the Pareto distribution is the better fit over the stretched exponential. This alpha tail result is surprising, considering how stablecoins on CEX have alpha ranging between 2 and 4 from our previous research.
 
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/img_USDC_USDT_TAIL.png?raw=true" alt="Sample Image 1" width="1000"/>
 
 ## Eulerswap Parameter optimization
 
-From our tail fit alpha value we have determined that we can only use the median as the central point for our liquidity concentration. We now fit the empirical data using scipy, if it fails, we default to least squared approach:
+From our tail fit alpha value we have determined that we can only use the median as the central point for our liquidity concentration (mean and standard deviation are undefined). We now fit the empirical data using scipy, if it fails, we default to least squared approach:
 
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/data_viz/USDC_USDT_PARAMETERS.png?raw=true"  width="1000"/>
 
-
-
-our findings are parameter this, etc, mention similar to other pools.
-
-
-
+Our liquidity optimization tool tell us to structure our peak at the median of $0.999866 and for the left tail a c_down=0.9999999847 with much more liquidity S_down than S_up which has a c_up=0.9996806442.
 
 ## Future Potential and Further Optimization
 
-We have used this method to optimize liquidity for three stablecoin pairs (USDT/USDC, USDC/DAI, USDT/DAI) on Eulerswap, but this method can extend to all pairs, doing so would require 
-- how to spot a depeg - sources: general market liquidity (point gordon liao study) and its flow to stables, point out liquidity changes in past AMM uni v3 heatmap.
--does depeg continue? What is the Hurst exponent? What is the autocorrelation?
--what to do when depeg - set lower c to univ2
+We have used this method to optimize liquidity for three stablecoin pairs (USDT/USDC, USDC/DAI, USDT/DAI) on Eulerswap, but the future potential of this method can extend to all pairs( doing so would require downloading and running an entire archival node with cryo, which we are currently working on).
+
+Additionally, we ran out of time, but our method can be further improved for these parameters given the following discoveries during our work:
 
 ### Phase Space Neural Network Case
 very basic strat buy above 1 wait for 10 min, if not 1 sell - potential future direction - take the heatmap, express it as a matrix, use neural network to train it on the value of c!
@@ -110,10 +104,14 @@ cryo logs \
 
 ### Time Optimization Case
 
-Cases of volatility lasting: windowed fourier transform, autocorrelation negative, hurst exponent below 0.5
+
 
 An important thing to note is anti-correlation, a rapid up move in a block can expect the next block to be a rapid down move.
 
+
+- how to spot a depeg - sources: general market liquidity (point gordon liao study) and its flow to stables, point out liquidity changes in past AMM uni v3 heatmap.
+-does depeg continue? What is the Hurst exponent? What is the autocorrelation?
+-what to do when depeg - set lower c to univ2
 
 For example, just as the procedure we used above by extracting the empirical price movement of the pool, 
 we can extract the overall historic liquidity distribution, and simply mimic the behavior - such an approach would mean though that we would be at least two blocks behind (one for reading the data of current liquidity block and one for adjusting eulerswap parameters to fit the liquidity distribution on the next block) 
