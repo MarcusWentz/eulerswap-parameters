@@ -86,14 +86,7 @@ git clone https://github.com/your-username/eulerswap-liquidity-optimization.git
 cd eulerswap-liquidity-optimization
 ```
 
-## Further Optimization
 
-optimize c_1 and c_2 parameters for eulerswap pool
-dl full eth node
-extract usdc/usdt block sqrtpricex96 from univ3
-statistical fit in python for liquidity fingerprint of eulerswap for c_1 and c_2 
-
-[Watch the demo video](img/data_viz/USD_DAI_cex_1_minute.mp4)
 
 
 ## Data Retrieval
@@ -102,13 +95,7 @@ statistical fit in python for liquidity fingerprint of eulerswap for c_1 and c_2
 Instructions for retrieving data using Cryo:
 
 ```bash
-cryo logs \
---rpc API_KEY \
---contract 0x5777d92f208679DB4b9778590Fa3CAB3aC9e2168 \
---event-signature "Mint(address sender, address indexed owner, int24 indexed tickLower, int24 indexed tickUpper, uint128 amount, int256 amount0, int256 amount1)" \
---event-signature "Burn(address indexed owner, int24 indexed tickLower, int24 indexed tickUpper, uint128 amount, int256 amount0, int256 amount1)" \
---blocks 12376729:12377729 \
---output-dir ./Python/data_cryo
+cryo logs --rpc https://eth.drpc.org --contract 0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640 --event-signature "Swap(address indexed sender, address indexed recipient, int256 amount0, int256 amount1, uint160 sqrtPriceX96, uint128 liquidity, int24 tick)" --topic0 0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67 --blocks 18050000:18060000 --requests-per-second 10 --max-concurrent-requests 5 --output-dir ./Python/data_cryo
 ```
 
 ### SQL
@@ -128,10 +115,38 @@ curl -H "X-Dune-API-Key:_____________________" "https://api.dune.com/api/v1/quer
 ## Images
 
 
-
-
-<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/img_USDC_USDT_TAIL.png?raw=true" alt="Sample Image 1" width="1000"/>
+## Tail analysis
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/USDC_USDT_Histogram.png?raw=true" alt="Stats" width="1000"/>
+## Tail fit
+<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/img_USDC_USDT_TAIL.png?raw=true" alt="Sample Image 1" width="1000"/>
+## Conclusion optimization
+https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/eulerswap_pool_parameters.png?raw=true
+## Phase Space
+t+5 (5 blocks equivalent to 1 minute)
+<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/data_viz/USDC_USDT_phase_space_block1.jpg?raw=true" alt="Stats" width="1000"/>
+t+300 (300 blocks equivalent to 1 hour)
+<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/data_viz/USDC_USDT_phase_space_block300.jpg?raw=true" alt="Stats" width="1000"/>
+[Watch the demo video](img/data_viz/USD_DAI_cex_1_minute.mp4)
+
+
+## Further Optimization
+
+optimize c_1 and c_2 parameters for eulerswap pool
+dl full eth node
+extract usdc/usdt block sqrtpricex96 from univ3
+
+Alternative optimization - histogram from liquidity of univ3 - wisdom of the crowd with cryo:
+Instructions for retrieving data using Cryo:
+
+```bash
+cryo logs \
+--rpc API_KEY \
+--contract 0x5777d92f208679DB4b9778590Fa3CAB3aC9e2168 \
+--event-signature "Mint(address sender, address indexed owner, int24 indexed tickLower, int24 indexed tickUpper, uint128 amount, int256 amount0, int256 amount1)" \
+--event-signature "Burn(address indexed owner, int24 indexed tickLower, int24 indexed tickUpper, uint128 amount, int256 amount0, int256 amount1)" \
+--blocks 12376729:12377729 \
+--output-dir ./Python/data_cryo
+```
 
 
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Stablecoin_Frequencies.png?raw=true" alt="Sample Image 1" width="1000"/>
