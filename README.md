@@ -47,20 +47,10 @@ We can fit the Eulerswap liquidity fingerprint to previous historic data of stab
 
 We focus in this section just on the USDC/USDT pair below, but the other pool data output are also available in the img folder, including its behavior in [phasespace](https://drive.google.com/drive/folders/1AzrlKZApBz60PD6itQ5ry6MnSiqOLOAe).
 
-### Stablecoin Pool Tail Analysis
-Why USDT/DAI may be best pool, the constant mint and burn of the stablecoin will cause changes in DAI price (*thereby generating  more in fees!!), which would counter the stale price of USDT or USDC which may deviate and generate fees more in times of unforeseen crises rather than simply due to mint/burn mechanisms of DAI-like stablecoins.
-
-An important thing to note is anti-correlation, a rapid up move in a block can expect the next block to be a rapid down move.
-
-
-
-
-## Images
-
-## Tail analysis
+## Stablecoin Pool Tail Analysis
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/USDC_USDT_Histogram.png?raw=true" alt="Stats" width="1000"/>
-## Tail fit
 
+## Tail fit
 
 side not on tails - alpha 3-4 for erc-20 CEX non stables 2-4 for stables CEX, and apparently <2 for stables on DEX!
 
@@ -80,6 +70,7 @@ https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/eulerswap_pool
 
 ## Further Optimization
 
+Why USDT/DAI may be best pool, the constant mint and burn of the stablecoin will cause changes in DAI price (*thereby generating  more in fees!!), which would counter the stale price of USDT or USDC which may deviate and generate fees more in times of unforeseen crises rather than simply due to mint/burn mechanisms of DAI-like stablecoins.
 
 
 - how to spot a depeg - sources: general market liquidity (point gordon liao study) and its flow to stables, point out liquidity changes in past AMM uni v3 heatmap.
@@ -111,6 +102,9 @@ Instructions for retrieving data using Cryo:
 
 Cases of volatility lasting: windowed fourier transform, autocorrelation negative, hurst exponent below 0.5
 
+An important thing to note is anti-correlation, a rapid up move in a block can expect the next block to be a rapid down move.
+
+
 For example, just as the procedure we used above by extracting the empirical price movement of the pool, 
 we can extract the overall historic liquidity distribution, and simply mimic the behavior - such an approach would mean though that we would be at least two blocks behind (one for reading the data of current liquidity block and one for adjusting eulerswap parameters to fit the liquidity distribution on the next block) 
 
@@ -124,6 +118,7 @@ cryo logs \
 --blocks 12376729:12377729 \
 --output-dir ./Python/data_cryo
 ```
+
 
 If truly random, then the spectrogram would give us random noise with no patterns, yet we see vertical columns, mention red sinusoidal pattern
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Stablecoin_Frequencies.png?raw=true" alt="Sample Image 1" width="1000"/>
