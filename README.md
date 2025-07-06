@@ -70,7 +70,7 @@ Our liquidity optimization tool tell us to structure our peak at the median of $
 
 ## Future Potential and Further Optimization
 
-We have used this method to optimize liquidity for three stablecoin pairs (USDT/USDC, USDC/DAI, USDT/DAI) on Eulerswap, but the future potential of this method can extend to all pairs (doing so would require downloading and running an entire archival node with cryo with a good connection, which we are currently working on).
+We have used this method to optimize liquidity for three stablecoin pairs (USDT/USDC, USDC/DAI, USDT/DAI) with Eulerswap, but the future potential of this method can extend to all pairs (doing so would require downloading and running an entire archival node with cryo with a good connection, which we are currently working on).
 
 Additionally, we ran out of time, but our method can be further improved for these parameters given the following discoveries during our work:
 
