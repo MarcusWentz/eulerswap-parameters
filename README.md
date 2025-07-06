@@ -12,7 +12,7 @@ Method for optimizing liquidity parameters for Eulerswap with primary focus on s
   - Stablecoin Pool Tail Analysis 
   - Stablecoin Pool Tail Fit
   - Eulerswap Parameter Fit Tool
-- Further Optimization Directions
+- Further Potential Optimization Directions
   - Uniswap Liquidity Distribution
   - Phase Space Neural Network
   - Time-based Concentration
@@ -26,14 +26,14 @@ Method for optimizing liquidity parameters for Eulerswap with primary focus on s
 
 Eulerswap is a piece-wise AMM and can be dissected into two functions (red and blue) along four frameworks:
   - 1A. Reserve space to see invariant / trading function (best viewed in log-log).
-  - 1B. Liquidity provider's payoff / value function to see divergence loss and curvature sensitivity with Greeks in [desmos](https://www.desmos.com/calculator/8f6bcdcb41).
+  - 1B. Liquidity provider's payoff / value function to see divergence loss and sensitivity with Greeks in [desmos](https://www.desmos.com/calculator/8f6bcdcb41).
   - 1C. Liquidity fingerprint to see where liquidity is provided to capture trades.
   - 1D. Price impact function to see how concentration affects pool price change.
 
 We are mainly focused on the liquidity fingerprint in Figure 1C since we can use it to optimize the fit for our empirical observations of stablecoin price behavoir. 
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_AMM.png" alt="Sample Image 1" width="1000"/>
 
-The liquidity fingerprint can be derived with a little bit of calculus and can be confirmed with [desmos](https://www.desmos.com/calculator/8f6bcdcb41) to be the following equation.
+The liquidity fingerprint L(x) with scale S and parameters c can be derived with a little bit of calculus and can be confirmed with [desmos](https://www.desmos.com/calculator/8f6bcdcb41) to be the following equation.
 
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_liquidity_distributions.jpg" alt="Sample Image 1" width="1000"/>
 
@@ -49,31 +49,24 @@ We focus in this section just on the USDC/USDT pair below, but the other pool da
 
 ## Stablecoin Pool Tail Analysis
 
-Explain chart, mention [power law](https://pypi.org/project/powerlaw/) library 
-
+We look at the sqrtpricex96 of USDC/USDT and adjust the decimals in plot A to normalize it at $1. The histogram in B confirms asymmetry in our pool with symmetric fat tailed distributions not being a good fit meaning we have to have separate parametrs for c_1 and c_2. Plots C and D confirm asymmetry in the tails. Plots E and F examine the slope of each percentage change as one descends along the histogram and require the [power law](https://pypi.org/project/powerlaw/) library.
 ```python
   pip install powerlaw
 ```
-
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/USDC_USDT_Histogram.png?raw=true" alt="Stats" width="1000"/>
 
 ## Tail fit
-
-Explain chart 
-
-side not on tails - alpha 3-4 for erc-20 CEX non stables 2-4 for stables CEX, and apparently <2 for stables on DEX!
-
-CEX data vs DEX data over same time interval
-point out stablecoin arbitrage and strategies possible because alphas don't match
-
+We fit two different distributions (Pareto and stretched exponential) and find that the power law is statistically significant both in its tail of alpha=1.6 for both tails (indicating a distribution so fat that the mean is undefined, but the median is) and also find that the Pareto distribution is the better fit over the stretched exponential. This result is surprising, considering how stablecoins on CEX have alpha ranging between 2 and 4 from our previous research.
 
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/img_USDC_USDT_TAIL.png?raw=true" alt="Sample Image 1" width="1000"/>
 
 ## Eulerswap Parameter optimization
 
-We have determined only median can be used, we now fit the empirical data using scipy, if it fails, defaul to least squared approach:
+From our tail fit alpha value we have determined that we can only use the median as the central point for our liquidity concentration. We now fit the empirical data using scipy, if it fails, we default to least squared approach:
 
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/data_viz/USDC_USDT_PARAMETERS.png?raw=true"  width="1000"/>
+
+
 
 our findings are parameter this, etc, mention similar to other pools.
 
