@@ -7,8 +7,13 @@ What should we set our liquidity parameters on Eulerswap to? We study the oldest
 ## Description 
 Method for optimizing liquidity parameters for Eulerswap with primary focus on stablecoins.
 - Eulerswap invariant analysis of LP Payoff, price impact, liquidity allocation across price space.
+-   -  
 - Statistical tools for analyzing stablecoin pool behavior
+-     -
+-     -
+- 
 - Tool for optimizing Eulerswap liquidity parameters based on one's forecast or historical data.
+- Approximation of Eulerswap with discrete LP positions to exit 100% out of a token.
 
 
 ## Installation
