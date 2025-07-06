@@ -51,7 +51,11 @@ WHERE protocol = 'Eulerswap';
 
 ## Images
 
-<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_AMM.png" alt="Sample Image 1" width="400"/>
+<img src="[https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_AMM.png](https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_liquidity_distributions.jpg)" alt="Sample Image 1" width="800"/>
+
+<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Stablecoin_Frequencies.png?raw=true" alt="Sample Image 1" width="800"/>
+
+<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_AMM.png" alt="Sample Image 1" width="800"/>
 ## License
 
 MIT
