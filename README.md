@@ -33,7 +33,7 @@ Eulerswap is a piece-wise AMM and can be dissected into two functions (red and b
 We are mainly focused on the liquidity fingerprint in Figure 1C since we can use it to optimize the fit for our empirical observations of stablecoin price behavoir. 
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_AMM.png" alt="Sample Image 1" width="1000"/>
 
-The liquidity fingerprint L(x) with scale S and parameters c can be derived with a little bit of calculus and can be confirmed with [desmos](https://www.desmos.com/calculator/8f6bcdcb41) to be the following equation.
+The liquidity fingerprint L(x) in price space with scale S and parameters c can be derived with a little bit of calculus and can be confirmed with [desmos](https://www.desmos.com/calculator/8f6bcdcb41) to be the following equation.
 
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_liquidity_distributions.jpg" alt="Sample Image 1" width="1000"/>
 
@@ -70,14 +70,14 @@ Our liquidity optimization tool tell us to structure our peak at the median of $
 
 ## Future Potential and Further Optimization
 
-We have used this method to optimize liquidity for three stablecoin pairs (USDT/USDC, USDC/DAI, USDT/DAI) on Eulerswap, but the future potential of this method can extend to all pairs( doing so would require downloading and running an entire archival node with cryo, which we are currently working on).
+We have used this method to optimize liquidity for three stablecoin pairs (USDT/USDC, USDC/DAI, USDT/DAI) on Eulerswap, but the future potential of this method can extend to all pairs (doing so would require downloading and running an entire archival node with cryo with a good connection, which we are currently working on).
 
 Additionally, we ran out of time, but our method can be further improved for these parameters given the following discoveries during our work:
 
 ### Phase Space Neural Network Case
 very basic strat buy above 1 wait for 10 min, if not 1 sell - potential future direction - take the heatmap, express it as a matrix, use neural network to train it on the value of c!
 
-extract usdc/usdt block sqrtpricex96 from univ3
+<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/phases_example.jpg?raw=true" alt="Stats" width="1000"/>
 
 t+5 (5 blocks equivalent to 1 minute)
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/data_viz/USDC_USDT_phase_space_block1.jpg?raw=true" alt="Stats" width="1000"/>
@@ -120,7 +120,7 @@ we can extract the overall historic liquidity distribution, and simply mimic the
 If truly random, then the spectrogram would give us random noise with no patterns, yet we see vertical columns, mention red sinusoidal pattern
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Stablecoin_Frequencies.png?raw=true" alt="Sample Image 1" width="1000"/>
 
-From our previous work on Uniswap v3 pools we also observe patterns linked to NYSE liquidity and bot activity at UTC-00:00, so one could optimize eulerswap parameters not just across the price space, but also time spectrum. For example, the data can be further refined by looking at the blocks prior to NYSE open and UTC 0:00 open to adjust the c_1 and c_2 parameters.
+From our previous work on Uniswap v3 pools at ETHNY we also observed patterns linked to NYSE liquidity and bot activity at UTC-00:00, so one could optimize Eulerswap parameters not just across the price space, but also time spectrum. For example, the data can be further refined by looking at the blocks prior to NYSE open and UTC 0:00 open to adjust the c_1 and c_2 parameters.
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/uniswap_trade_activity.jpeg?raw=true" alt="Sample Image 1" width="1000"/>
 
 
