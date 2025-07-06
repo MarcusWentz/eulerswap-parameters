@@ -20,7 +20,15 @@ Method for optimizing liquidity parameters for Eulerswap with primary focus on s
 
 
 # Eulerswap AMM
-Overview
+### Overview
+
+Any AMM can be dissected into four frameworks:
+  - Reserve space to see invariant / trading function best viewed in log-log.
+  - Liquidity provider's payoff / value function to see divergence loss.
+  - Liquidity fingerprint to see where liquidity is provided to capture trades.
+  - Price impact function to see how concentration affects pool price change.
+
+We are mainly focused on the Liquidity fingerprint in Figure 1C since we can use it to optimize our fit for our empirical observations of stablecoin price behavoir. An interactive version of Eulerswap is available in [interactive desmos url](https://www.desmos.com/calculator/8f6bcdcb41).
 <img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_AMM.png" alt="Sample Image 1" width="1000"/>
 
 Liquidity fingerprint is and can be confirmed with desmos
