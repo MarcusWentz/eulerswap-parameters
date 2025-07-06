@@ -1,5 +1,5 @@
 # Method for Eulerswap Liquidity Optimization
-[Watch the demo video](img/data_viz/USD_DAI_cex_1_minute.mp4)
+
 ![Project Banner](https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_AMM.png)
 ## Objective
 What should we set our liquidity parameters on Eulerswap to? We study the oldest AMM stablecoin pools on Uniswap to answer this question and focus on the biggest stablecoins: USDC, USDT, DAI.
@@ -8,11 +8,15 @@ Method for optimizing liquidity parameters for Eulerswap with primary focus on s
 - Eulerswap invariant analysis of LP Payoff, price impact, liquidity allocation across price space.
 -   -  
 - Statistical tools for analyzing stablecoin pool behavior
--     -
+   -
+   -
+-   -
 -     -
 - 
 - Tool for optimizing Eulerswap liquidity parameters based on one's forecast or historical data.
 - Approximation of Eulerswap with discrete LP positions to exit 100% out of a token.
+
+<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_liquidity_distributions.jpg" alt="Sample Image 1" width="1000"/>
 
 
 ## Installation
@@ -31,8 +35,8 @@ dl full eth node
 extract usdc/usdt block sqrtpricex96 from univ3
 statistical fit in python for liquidity fingerprint of eulerswap for c_1 and c_2 
 
-Further research section:
-liquidity flows , inverse fft
+[Watch the demo video](img/data_viz/USD_DAI_cex_1_minute.mp4)
+
 
 ## Data Retrieval
 
@@ -54,8 +58,6 @@ WHERE protocol = 'Eulerswap';
 ```
 
 ## Images
-
-<img src="https://github.com/MarcusWentz/eulerswap-parameters/blob/main/img/Eulerswap_liquidity_distributions.jpg" alt="Sample Image 1" width="1000"/>
 
 
 
